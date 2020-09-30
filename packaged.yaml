@@ -4,7 +4,20 @@ Resources:
   DynamoBooksTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
-      TableName: book
+      TableName: books
       PrimaryKey:
         Name: id
         Type: String
+  CreateBookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://aws-ejemplo/2e7cae053ae7cccf80648251ccdbb70a
+      Handler: create-book.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs12.x
+      Events:
+        CreateBook:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: post

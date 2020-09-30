@@ -11,7 +11,7 @@ Resources:
   CreateBookFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://aws-ejemplo/2e7cae053ae7cccf80648251ccdbb70a
+      CodeUri: s3://aws-ejemplo/80bb0af885e5fee7cd955e3551c675a2
       Handler: create-book.handler
       Policies: AmazonDynamoDBFullAccess
       Runtime: nodejs12.x
@@ -21,3 +21,16 @@ Resources:
           Properties:
             Path: /books
             Method: post
+  GetBooksFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://aws-ejemplo/80bb0af885e5fee7cd955e3551c675a2
+      Handler: get-books.handler
+      Policies: AmazonDynamoDBFullAccess
+      Runtime: nodejs12.x
+      Events:
+        GetBooks:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: get
